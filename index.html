@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<script>/* Full motion by default; the footer button turns it off (saved per browser). */(function(d){var rm=false;try{rm=localStorage.getItem('mt-motion')==='off'}catch(e){}window.__rm=rm;d.classList.add('js');if(rm)d.classList.add('rm');history.scrollRestoration='manual'})(document.documentElement)</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MT-THECREATOR | Custom Flyers, Invitations, Photos & Sweet Treats</title>
+<meta name="description" content="Order custom flyers, posters, invitations, business cards, photos, YouTube intros, cookies and mini loaf cakes from Mili at MT-THECREATOR. Pay online, then pick up or get it delivered.">
+<meta name="theme-color" content="#0b0b0b">
+<link rel="icon" href="img/mt-thecreator-logo.jpg">
+<link rel="apple-touch-icon" href="img/mt-thecreator-logo.jpg">
+<!-- Share preview: change the domain in these three tags if the live domain is different. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MT-THECREATOR">
+<meta property="og:url" content="https://mtthecreator.vercel.app/">
+<meta property="og:title" content="MT-THECREATOR | Made by hand, made with heart">
+<meta property="og:description" content="Custom designs, photos and homemade treats by Mili. Order and pay online.">
+<meta property="og:image" content="https://mtthecreator.vercel.app/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" as="image" href="img/dessert-strawberry-cake-boxes.jpg" fetchpriority="high">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Pinyon+Script&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="loader" aria-hidden="true">
+  <video src="media/torn-paper.mp4" poster="media/torn-paper-poster.jpg" muted playsinline autoplay loop></video>
+  <div class="ld-in">
+    <img src="img/mt-thecreator-logo.jpg" alt="" width="110" height="110">
+    <div class="ld-name">MT-THECREATOR</div>
+    <div class="ld-bar"><i id="ld-i"></i></div>
+    <div class="mono ld-pct" id="ld-p">0%</div>
+  </div>
+</div>
+
+<a class="sr" href="#shop">Skip to the shop</a>
+<div class="banner" id="banner" hidden></div>
+
+<nav aria-label="Main">
+  <div class="wrap nav-in">
+    <a href="#top" class="brand" aria-label="MT-THECREATOR, back to top"><img src="img/mt-thecreator-logo.jpg" alt="" width="40" height="40"><b>MT-THECREATOR</b></a>
+    <div class="nav-links" id="links">
+      <a href="#shop">Shop</a>
+      <a href="#work">The work</a>
+      <a href="#about">About</a>
+      <a href="#order">How to order</a>
+    </div>
+    <button class="bag-btn" id="bag-open" aria-label="Open your bag"><span class="bl">Bag</span><b id="bag-n">0</b></button>
+    <button class="menu-tg" id="menu-tg" aria-expanded="false" aria-controls="links" aria-label="Open menu">&#9776;</button>
+  </div>
+</nav>
+
+<main id="top">
+<header class="wrap hero">
+  <div>
+    <p class="mono eyebrow" data-hero>Design · Photos · Sweet treats</p>
+    <h1><span class="ln"><span>Made by hand,</span></span><span class="ln"><span class="script">made with heart.</span></span></h1>
+    <p class="sub" data-hero>Flyers, invitations, business cards and YouTube intros, plus photo shoots and homemade cookies and mini loaf cakes. Everything is custom-made by Mili.</p>
+    <div class="cta" data-hero>
+      <a class="btn" href="#shop">Shop &amp; order</a>
+      <a class="btn btn-ghost" href="#work">See the work</a>
+    </div>
+  </div>
+  <div class="hero-art" data-hero>
+    <div class="frame" id="hero-frame"><img src="img/dessert-strawberry-cake-boxes.jpg" alt="Strawberry cakes in boxes, each sealed with an MT-THECREATOR sticker" width="1200" height="1600" fetchpriority="high"></div>
+    <div class="tag"><span>Mini loaf cakes</span><strong id="tag-price">$5 each</strong></div>
+  </div>
+</header>
+
+<div class="torn" aria-hidden="true"></div>
+<section id="shop" class="light" aria-labelledby="h-shop">
+  <div class="wrap">
+    <div class="sec-head" data-rv>
+      <p class="mono">01 · The shop</p>
+      <h2 id="h-shop">Order online</h2>
+      <p>Add what you need to your bag and pay securely by card. Tell Mili the details (wording, colors, dates) at checkout.</p>
+    </div>
+    <div class="tabs" role="tablist" aria-label="Categories" data-rv>
+      <button role="tab" aria-selected="true" data-cat="all">All</button>
+      <button role="tab" aria-selected="false" data-cat="paper">Design &amp; print</button>
+      <button role="tab" aria-selected="false" data-cat="media">Photo &amp; video</button>
+      <button role="tab" aria-selected="false" data-cat="treat">Sweet treats</button>
+    </div>
+    <div class="grid" id="grid" aria-live="polite"></div>
+    <p class="shop-note">Treats are pickup only for now. Design and print orders can be picked up or delivered.</p>
+  </div>
+</section>
+<div class="torn down" aria-hidden="true"></div>
+
+<section class="statement" aria-label="About the work">
+  <div class="wrap"><p id="stmt">Every flyer, every invitation, every cookie starts with one idea: <span class="pk">your moment should look as good as it feels.</span></p></div>
+</section>
+
+<section id="work" aria-labelledby="h-work">
+  <div class="wrap">
+    <div class="sec-head" data-rv>
+      <p class="mono">02 · Portfolio</p>
+      <h2 id="h-work">The work</h2>
+      <p>Real designs, real shoots and real bakes.</p>
+    </div>
+    <div class="gallery">
+      <figure data-rv><img src="img/flyer-keykuratedmoments-price-list.jpg" alt="Event decorating price list flyer in burnt orange and gold" loading="lazy" width="1600" height="1236"><figcaption><b>Flyer</b> · Price list</figcaption></figure>
+      <figure data-rv><img src="img/dessert-lemon-cookies.jpg" alt="Lemon cookies dusted with powdered sugar beside lemon slices" loading="lazy" width="1200" height="1600"><figcaption><b>Treats</b> · Lemon cookies</figcaption></figure>
+      <figure data-rv><img src="img/flyer-millys-night-house-party.jpg" alt="Millys Night house party flyer with caution tape" loading="lazy" width="1143" height="1600"><figcaption><b>Flyer</b> · Party night</figcaption></figure>
+      <figure data-rv><video src="media/collage.mp4" poster="media/collage-poster.jpg" muted playsinline loop preload="none" aria-label="Photo collage video" data-autoplay></video><figcaption><b>Video</b> · Photo collage</figcaption></figure>
+      <figure data-rv><img src="img/photo-basketball-gym.jpg" alt="Basketball player in a dark, moody gym" loading="lazy" width="1200" height="1600"><figcaption><b>Photography</b> · Game day</figcaption></figure>
+      <figure data-rv><img src="img/flyer-tommys-58th-birthday-bash.jpg" alt="Birthday bash flyer with a multi-day schedule" loading="lazy" width="1236" height="1600"><figcaption><b>Flyer</b> · Birthday bash</figcaption></figure>
+      <figure data-rv><img src="img/dessert-strawberry-cake-boxes.jpg" alt="Boxed strawberry cakes with pink frosting" loading="lazy" width="1200" height="1600"><figcaption><b>Treats</b> · Strawberry cakes</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="about" aria-labelledby="h-about">
+  <div class="wrap about">
+    <img class="logo" src="img/mt-thecreator-logo.jpg" alt="MT-THECREATOR logo: torn paper with a pink neon signature" width="320" height="320" loading="lazy" data-rv>
+    <div data-rv>
+      <p class="mono" style="color:var(--pink)">03 · Meet the creator</p>
+      <h2 id="h-about">A small business with <span class="script">big creativity.</span></h2>
+      <p>MT-THECREATOR is run by Mili, who puts her creativity into every piece of work, from a party flyer to a box of cookies.</p>
+      <p>Every order is made just for you.</p>
+    </div>
+  </div>
+</section>
+
+<div class="torn" aria-hidden="true"></div>
+<section id="order" class="light" aria-labelledby="h-order">
+  <div class="wrap">
+    <div class="flash" id="flash" role="status" hidden></div>
+    <div class="sec-head" data-rv>
+      <p class="mono">04 · How to order</p>
+      <h2>Three easy steps</h2>
+    </div>
+    <div class="steps">
+      <div class="step" data-rv><div class="num">01</div><h3>Add to bag</h3><p>Pick a design, photo package or treats from the shop.</p></div>
+      <div class="step" data-rv><div class="num">02</div><h3>Tell &amp; pay</h3><p>Add your details, choose pickup or delivery, and pay securely by card.</p></div>
+      <div class="step" data-rv><div class="num">03</div><h3>Get it made</h3><p>Mili texts you to confirm, makes it, and has it ready on your day.</p></div>
+    </div>
+    <div class="contact" data-rv>
+      <h2 id="h-order">Ready? <span class="script">Let's create.</span></h2>
+      <p>Questions first? Send Mili a message.</p>
+      <div class="cta">
+        <a class="btn" href="#shop">Start an order</a>
+        <a class="btn btn-ghost" id="ig-link" href="https://instagram.com/mt.thecreator" target="_blank" rel="noopener">DM @mt.thecreator</a>
+        <a class="btn btn-ghost" id="text-link" href="#" hidden>Text Mili</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap ft">
+    <span>© <span id="yr"></span> MT-THECREATOR · Thank you for shopping with me</span>
+    <nav aria-label="Footer"><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></nav>
+    <button class="motion-tg" id="motion-tg" type="button"></button>
+  </div>
+</footer>
+
+<!-- bag + checkout -->
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="dr-h" aria-hidden="true">
+  <div class="dr-head"><h2 id="dr-h">Your bag</h2><button class="x" id="bag-close" aria-label="Close bag">&times;</button></div>
+  <div class="dr-body">
+    <div id="lines"></div>
+    <div class="total" id="total-row" hidden><span class="mono">Total</span><b id="total">$0</b></div>
+    <form class="co" id="co" novalidate hidden>
+      <label>Name<input name="name" autocomplete="name" required maxlength="80"></label>
+      <label>Phone (Mili texts you)<input name="phone" type="tel" autocomplete="tel" required maxlength="20"></label>
+      <label>Email (for your receipt)<input name="email" type="email" autocomplete="email" maxlength="120"></label>
+      <fieldset style="border:0;padding:0;display:grid;gap:6px">
+        <legend class="mono" style="font-size:13px;letter-spacing:.12em;margin-bottom:6px">How you get it</legend>
+        <div class="seg">
+          <label><input type="radio" name="fulfil" value="pickup" checked> Pickup</label>
+          <label id="deliv-opt"><input type="radio" name="fulfil" value="delivery"> Delivery</label>
+        </div>
+        <span class="hint" id="fulfil-hint"></span>
+      </fieldset>
+      <label id="addr-wrap" hidden>Delivery address<input name="address" autocomplete="street-address" maxlength="200"></label>
+      <div id="day-wrap" hidden>
+        <span class="mono" style="font-size:13px;letter-spacing:.12em">Pickup day</span>
+        <div class="days" id="days" style="margin-top:8px"></div>
+      </div>
+      <label id="date-wrap">Needed by (optional)<input name="needby" type="date"></label>
+      <label>Details for Mili<textarea name="details" maxlength="1500" placeholder="Wording, colors, event date, flavors, sizes..."></textarea></label>
+      <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <p class="err" id="co-err" role="alert"></p>
+      <button class="btn" id="pay" type="submit">Pay securely</button>
+      <span class="hint">You'll pay on Stripe's secure checkout page. Card details never touch this site.</span>
+    </form>
+  </div>
+</aside>
+<div class="toast" id="toast" role="status"></div>
+
+<script src="supabase-config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js" defer></script>
+<script src="main.js" defer></script>
+</body>
+</html>

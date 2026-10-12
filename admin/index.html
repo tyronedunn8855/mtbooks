@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Mili's Studio</title>
+<meta name="theme-color" content="#0b0b0b">
+<link rel="icon" href="../img/mt-thecreator-logo.jpg">
+<link rel="apple-touch-icon" href="../img/mt-thecreator-logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Pinyon+Script&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+<header class="top">
+  <img src="../img/mt-thecreator-logo.jpg" alt="" width="36" height="36">
+  <div><b>Mili's Studio</b><span class="script">behind the counter</span></div>
+  <button id="out" class="ghost" hidden>Sign out</button>
+</header>
+
+<main>
+  <!-- sign in -->
+  <section id="v-signin" class="pane" hidden>
+    <h1>Welcome back, <span class="script">Mili.</span></h1>
+    <p>Enter your email and we'll send you a sign-in link. No password needed.</p>
+    <form id="f-signin" class="stack">
+      <label>Email<input type="email" name="email" autocomplete="email" required></label>
+      <button class="pink" type="submit">Send my link</button>
+      <p class="msg" id="signin-msg" role="status"></p>
+    </form>
+  </section>
+
+  <section id="v-off" class="pane" hidden>
+    <h1>Not connected yet</h1>
+    <p>The studio needs the shop database. Ty: fill in <code>supabase-config.js</code> after running <code>supabase/setup.sql</code>.</p>
+  </section>
+
+  <section id="v-denied" class="pane" hidden>
+    <h1>This studio is Mili's</h1>
+    <p>You're signed in, but this account can't edit the shop. Sign out and use the owner email.</p>
+  </section>
+
+  <!-- app -->
+  <div id="v-app" hidden>
+    <section id="t-orders" class="pane">
+      <div class="head"><h1>Orders</h1><button class="ghost" id="refresh">Refresh</button></div>
+      <div class="chips" id="o-filter" role="tablist" aria-label="Filter orders">
+        <button data-f="open" aria-selected="true">To do</button>
+        <button data-f="done" aria-selected="false">Done</button>
+        <button data-f="all" aria-selected="false">All</button>
+      </div>
+      <div id="orders" class="tickets"></div>
+    </section>
+
+    <section id="t-menu" class="pane" hidden>
+      <div class="head"><h1>Menu &amp; prices</h1><button class="pink" id="m-new">Add item</button></div>
+      <p class="hint">Changes show on the site right away. Turn an item off to hide it without deleting it.</p>
+      <div id="menu" class="list"></div>
+    </section>
+
+    <section id="t-days" class="pane" hidden>
+      <div class="head"><h1>Pickup days</h1></div>
+      <p class="hint">Tap a day to open or close it for treat pickups. Customers can only pick open days.</p>
+      <div class="cal-nav"><button class="ghost" id="cal-prev" aria-label="Previous month">&larr;</button><b id="cal-title"></b><button class="ghost" id="cal-next" aria-label="Next month">&rarr;</button></div>
+      <div class="cal" id="cal"></div>
+    </section>
+
+    <section id="t-shop" class="pane" hidden>
+      <div class="head"><h1>Shop settings</h1></div>
+      <form id="f-shop" class="stack">
+        <label class="switch"><input type="checkbox" name="open"> <span>Taking orders</span></label>
+        <label>Banner message (optional)<input name="banner" maxlength="140" placeholder="e.g. Holiday cookie boxes are here!"></label>
+        <label>Delivery fee for paper goods ($)<input name="fee" type="number" min="0" max="200" step="0.5" inputmode="decimal"></label>
+        <label>Phone for the "Text Mili" button<input name="phone" type="tel" maxlength="20"></label>
+        <label>Instagram handle<input name="instagram" maxlength="40" placeholder="mt.thecreator"></label>
+        <button class="pink" type="submit">Save</button>
+      </form>
+    </section>
+  </div>
+</main>
+
+<nav class="tabbar" id="tabbar" hidden aria-label="Studio">
+  <button data-t="orders" aria-current="page"><span>Orders</span><i id="badge" hidden></i></button>
+  <button data-t="menu"><span>Menu</span></button>
+  <button data-t="days"><span>Days</span></button>
+  <button data-t="shop"><span>Shop</span></button>
+</nav>
+<div class="toast" id="toast" role="status"></div>
+
+<script src="../supabase-config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>

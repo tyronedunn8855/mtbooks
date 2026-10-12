@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /api/
+Sitemap: https://mtthecreator.vercel.app/sitemap.xml
