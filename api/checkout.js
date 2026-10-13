@@ -1,5 +1,5 @@
 // Creates an order and a Stripe Checkout page for it. Prices always come from the database, never from the browser.
-// Env vars (Vercel only): STRIPE_SECRET_KEY, SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, SITE_URL (e.g. https://mtthecreator.vercel.app).
+// Env vars (Vercel only): STRIPE_SECRET_KEY, SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, SITE_URL (e.g. https://mtbooks.vercel.app).
 const sb = require('./_sb');
 
 const hits = new Map(); // ponytail: per-instance rate limit; use Upstash if abuse shows up

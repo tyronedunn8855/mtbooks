@@ -15,7 +15,7 @@ Static site + two Vercel functions. Layout follows ken.didit; the brand, panel a
 3. Stripe (Milly's account): copy the secret key. Add a webhook to `https://<domain>/api/stripe-webhook` for
    `checkout.session.completed` and `checkout.session.async_payment_succeeded`, then copy its signing secret.
 4. Vercel env vars: `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `SITE_URL`.
-5. If the domain isn't `mtthecreator.vercel.app`, update the og tags in `index.html`, `robots.txt` and `sitemap.xml`.
+5. If the domain isn't `mtbooks.vercel.app`, update the og tags in `index.html`, `robots.txt` and `sitemap.xml`.
 6. Test with Stripe test-mode keys first: place an order, pay with card 4242 4242 4242 4242, and check that it shows as Paid in the Studio.
 
 Until steps 1 to 4 are done, the site shows its built-in menu and checkout honestly says online payment isn't switched on yet.
