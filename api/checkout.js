@@ -52,7 +52,7 @@ module.exports = async (req, res) => {
   // names only (never values), so a missing Vercel variable is easy to spot
   const missing = ['STRIPE_SECRET_KEY', 'SUPABASE_URL', 'SUPABASE_SERVICE_ROLE_KEY'].filter(k => !process.env[k]);
   // seen: names of any STRIPE/SUPABASE variables present (JSON-quoted so stray spaces show). Never values.
-  if (missing.length) return send(503, { error: 'not_connected', missing, seen: Object.keys(process.env).filter(k => /stripe|supabase/i.test(k)).map(k => JSON.stringify(k)) });
+  if (missing.length) return send(503, { error: 'not_connected', missing, seen: Object.keys(process.env).filter(k => /stripe|supabase/i.test(k)).map(k => JSON.stringify(k)), keyAsName: Object.keys(process.env).some(k => /^\s*(sk|rk)_(test|live)_/.test(k)), count: Object.keys(process.env).length });
   const ip = String(req.headers['x-forwarded-for'] || '').split(',')[0].trim() || 'x';
   if (limited(ip)) return send(429, { error: 'Too many tries. Please wait a minute.' });
   let raw = ''; for await (const c of req) { raw += c; if (raw.length > 16384) return send(413, { error: 'too big' }); }
