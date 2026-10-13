@@ -49,7 +49,9 @@ function build(body, products, openDays, shop, today) {
 module.exports = async (req, res) => {
   const send = (code, obj) => { res.statusCode = code; res.setHeader('Content-Type', 'application/json'); res.setHeader('Cache-Control', 'no-store'); res.end(JSON.stringify(obj)); };
   if (req.method !== 'POST') return send(405, { error: 'POST only' });
-  if (!process.env.STRIPE_SECRET_KEY || !sb.ready()) return send(503, { error: 'not_connected' });
+  // names only (never values), so a missing Vercel variable is easy to spot
+  const missing = ['STRIPE_SECRET_KEY', 'SUPABASE_URL', 'SUPABASE_SERVICE_ROLE_KEY'].filter(k => !process.env[k]);
+  if (missing.length) return send(503, { error: 'not_connected', missing });
   const ip = String(req.headers['x-forwarded-for'] || '').split(',')[0].trim() || 'x';
   if (limited(ip)) return send(429, { error: 'Too many tries. Please wait a minute.' });
   let raw = ''; for await (const c of req) { raw += c; if (raw.length > 16384) return send(413, { error: 'too big' }); }
