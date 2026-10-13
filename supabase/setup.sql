@@ -1,5 +1,5 @@
 -- MT-THECREATOR shop database. Run once in Supabase > SQL Editor.
--- BEFORE RUNNING: replace OWNER@EMAIL.COM (two places below) with Mili's sign-in email.
+-- BEFORE RUNNING: replace OWNER@EMAIL.COM (two places below) with Milly's sign-in email.
 -- The site reads products, open days and settings with the public key.
 -- Orders are written only by the server (api/checkout.js, service key), and only the owner can read them.
 
@@ -60,7 +60,7 @@ drop policy if exists s_own  on settings;   create policy s_own  on settings for
 drop policy if exists o_own  on orders;     create policy o_own  on orders for select using (is_owner());
 drop policy if exists o_upd  on orders;     create policy o_upd  on orders for update using (is_owner()) with check (is_owner());
 
--- Starting menu (Mili's prices, 2026-10-12). She edits these in the panel.
+-- Starting menu (Milly's prices, 2026-10-12). She edits these in the panel.
 insert into products (id,cat,name,note,price_cents,sort) values
  ('itinerary','paper','Itinerary','',2500,1),
  ('poster','paper','Poster','',2500,2),
@@ -70,7 +70,7 @@ insert into products (id,cat,name,note,price_cents,sort) values
  ('bizcard','paper','Business cards','',1500,6),
  ('pfp','paper','Business profile picture','',1000,7),
  ('photo-edit','media','Photo editing','Your photos, edited',1000,10),
- ('photo-shoot','media','Photo shoot + editing','Taken and edited by Mili',1500,11),
+ ('photo-shoot','media','Photo shoot + editing','Taken and edited by Milly',1500,11),
  ('yt','media','YouTube intro / outro','',3000,12),
  ('cookie-1','treat','Cookie','Single',200,20),
  ('cookie-3','treat','Cookies, 3 pack','',500,21),

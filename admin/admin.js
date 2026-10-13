@@ -1,4 +1,4 @@
-/* Mili's Studio: orders, menu, pickup days and shop settings.
+/* Milly's Studio: orders, menu, pickup days and shop settings.
    Security lives in the database (Row Level Security in supabase/setup.sql), not in this file:
    only the owner email can read orders or change anything. */
 (function () {
@@ -77,7 +77,7 @@
       Object.entries(STATUS).forEach(([k, v]) => { const op = el('option', '', v); op.value = k; op.selected = o.status === k; sel.append(op); });
       sel.onchange = guard(async () => { must(await sb.from('orders').update({ status: sel.value }).eq('id', o.id).select()); o.status = sel.value; toast('Saved'); renderOrders(); });
       const phone = String(o.phone || '').replace(/[^\d+]/g, '');
-      const txt = el('a', '', 'Text'); txt.href = 'sms:' + phone + '?&body=' + encodeURIComponent('Hi ' + o.name.split(' ')[0] + ', this is Mili from MT-THECREATOR about your order!');
+      const txt = el('a', '', 'Text'); txt.href = 'sms:' + phone + '?&body=' + encodeURIComponent('Hi ' + o.name.split(' ')[0] + ', this is Milly from MT-THECREATOR about your order!');
       const call = el('a', '', 'Call'); call.href = 'tel:' + phone;
       acts.append(sel, txt, call);
       if (o.email) { const m = el('a', '', 'Email'); m.href = 'mailto:' + encodeURIComponent(o.email); acts.append(m); }

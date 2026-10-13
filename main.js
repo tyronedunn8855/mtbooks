@@ -11,7 +11,7 @@
     ['itinerary', 'paper', 'Itinerary', '', 2500], ['poster', 'paper', 'Poster', '', 2500], ['flyer', 'paper', 'Flyer', '', 1500],
     ['card', 'paper', 'Card', '', 1500], ['invite', 'paper', 'Custom invitation', '', 1500], ['bizcard', 'paper', 'Business cards', '', 1500],
     ['pfp', 'paper', 'Business profile picture', '', 1000], ['photo-edit', 'media', 'Photo editing', 'Your photos, edited', 1000],
-    ['photo-shoot', 'media', 'Photo shoot + editing', 'Taken and edited by Mili', 1500], ['yt', 'media', 'YouTube intro / outro', '', 3000],
+    ['photo-shoot', 'media', 'Photo shoot + editing', 'Taken and edited by Milly', 1500], ['yt', 'media', 'YouTube intro / outro', '', 3000],
     ['cookie-1', 'treat', 'Cookie', 'Single', 200], ['cookie-3', 'treat', 'Cookies, 3 pack', '', 500],
     ['milly-dozen', 'treat', 'Milly Dozen', '13 cookies', 1500], ['loaf', 'treat', 'Mini loaf cake', '', 500]
   ].map(([id, cat, name, note, price_cents], sort) => ({ id, cat, name, note, price_cents, sort, active: true }));
@@ -102,12 +102,12 @@
     d.disabled = treat;
     if (treat && d.checked) $('input[value=pickup]').checked = true;
     const fee = +SHOP.delivery_fee_cents || 0;
-    $('#fulfil-hint').textContent = treat ? 'Treats are pickup only for now.' : (fee ? 'Delivery adds ' + money(fee) + '.' : 'Mili will confirm delivery details by text.');
+    $('#fulfil-hint').textContent = treat ? 'Treats are pickup only for now.' : (fee ? 'Delivery adds ' + money(fee) + '.' : 'Milly will confirm delivery details by text.');
     $('#addr-wrap').hidden = fulfil() !== 'delivery';
     $('#day-wrap').hidden = !treat;
     $('#date-wrap').hidden = treat;
     const days = $('#days'); days.textContent = '';
-    if (treat && !DAYS.length) days.append(el('span', 'hint', 'No pickup days are open right now. Text or DM Mili to plan your treats.'));
+    if (treat && !DAYS.length) days.append(el('span', 'hint', 'No pickup days are open right now. Text or DM Milly to plan your treats.'));
     DAYS.forEach(d => {
       const b = el('button', '', new Date(d.day + 'T12:00').toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }));
       b.type = 'button'; b.setAttribute('aria-pressed', d.day === pickDay);
@@ -143,7 +143,7 @@
     const v = n => f.elements[n].value.trim();
     err.textContent = '';
     if (v('name').length < 2) return fail('Please enter your name.', 'name');
-    if (v('phone').replace(/\D/g, '').length < 10) return fail('Please enter a phone number Mili can text.', 'phone');
+    if (v('phone').replace(/\D/g, '').length < 10) return fail('Please enter a phone number Milly can text.', 'phone');
     if (v('email') && !f.elements.email.checkValidity()) return fail('That email doesn\'t look right.', 'email');
     if (fulfil() === 'delivery' && v('address').length < 6) return fail('Please enter the delivery address.', 'address');
     if (hasTreat() && !pickDay) return fail('Please pick a pickup day for your treats.');
@@ -159,7 +159,7 @@
       const out = await r.json().catch(() => ({}));
       if (r.ok && out.url) { location.href = out.url; return; }
       if (r.status === 503 || r.status === 404 || out.error === 'not_connected')
-        return fail('Online payment isn\'t switched on yet. Please DM or text Mili to place this order.');
+        return fail('Online payment isn\'t switched on yet. Please DM or text Milly to place this order.');
       fail(out.error || 'Checkout failed. Please try again.');
     } catch (x) { fail('Couldn\'t reach checkout. Check your connection and try again.'); }
     function fail(msg, field) { err.textContent = msg; pay.disabled = false; pay.textContent = 'Pay securely'; if (field) f.elements[field].focus(); }
@@ -167,7 +167,7 @@
 
   /* return from Stripe */
   const qs = new URLSearchParams(location.search), flash = $('#flash');
-  if (qs.has('paid')) { flash.hidden = false; flash.textContent = 'Thank you! Your payment went through. Mili will text you to confirm your order.'; bag = []; save(); }
+  if (qs.has('paid')) { flash.hidden = false; flash.textContent = 'Thank you! Your payment went through. Milly will text you to confirm your order.'; bag = []; save(); }
   else if (qs.has('cancelled')) { flash.hidden = false; flash.textContent = 'Checkout was cancelled. Your bag is still saved.'; }
   if (qs.has('paid') || qs.has('cancelled')) history.replaceState(null, '', location.pathname + location.hash);
 
@@ -183,7 +183,7 @@
 
   function applyShop() {
     const b = $('#banner');
-    if (SHOP.open === false) { b.hidden = false; b.textContent = SHOP.banner || 'Mili is not taking new orders right now. Check back soon.'; }
+    if (SHOP.open === false) { b.hidden = false; b.textContent = SHOP.banner || 'Milly is not taking new orders right now. Check back soon.'; }
     else if (SHOP.banner) { b.hidden = false; b.textContent = SHOP.banner; }
     if (SHOP.instagram) { const ig = $('#ig-link'); ig.href = 'https://instagram.com/' + encodeURIComponent(SHOP.instagram); ig.textContent = 'DM @' + SHOP.instagram; }
     if (SHOP.phone) { const t = $('#text-link'); t.hidden = false; t.href = 'sms:' + String(SHOP.phone).replace(/[^\d+]/g, ''); }

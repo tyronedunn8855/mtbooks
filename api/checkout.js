@@ -13,11 +13,11 @@ const DAY = /^\d{4}-\d{2}-\d{2}$/;
 
 // Pure check of the order against the menu. Returns {error} or {order, lines}.
 function build(body, products, openDays, shop, today) {
-  if (!shop || shop.open === false) return { error: 'Mili is not taking orders right now.' };
+  if (!shop || shop.open === false) return { error: 'Milly is not taking orders right now.' };
   if (clean(body.website, 100)) return { error: 'spam' }; // honeypot
   const name = clean(body.name, 80), phone = clean(body.phone, 20).replace(/[^\d+]/g, ''), email = clean(body.email, 120);
   if (name.length < 2) return { error: 'Please enter your name.' };
-  if (phone.replace(/\D/g, '').length < 10) return { error: 'Please enter a phone number Mili can text.' };
+  if (phone.replace(/\D/g, '').length < 10) return { error: 'Please enter a phone number Milly can text.' };
   if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return { error: 'That email doesn\'t look right.' };
   if (!Array.isArray(body.items) || !body.items.length || body.items.length > 30) return { error: 'Your bag is empty.' };
   const byId = new Map(products.filter(p => p.active).map(p => [p.id, p]));
@@ -90,7 +90,7 @@ module.exports = async (req, res) => {
     return send(200, { url: s.url });
   } catch (e) {
     console.error(e);
-    return send(500, { error: 'Checkout failed. Please try again or text Mili.' });
+    return send(500, { error: 'Checkout failed. Please try again or text Milly.' });
   }
 };
 module.exports.build = build;

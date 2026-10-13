@@ -1,5 +1,5 @@
 // Stripe calls this when a checkout is paid. It checks Stripe's signature with STRIPE_WEBHOOK_SECRET (Vercel env),
-// then marks the order paid in Mili's panel. api/checkout.js sends the order id as client_reference_id.
+// then marks the order paid in Milly's panel. api/checkout.js sends the order id as client_reference_id.
 const crypto = require('crypto');
 const sb = require('./_sb');
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
