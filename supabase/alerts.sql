@@ -26,3 +26,6 @@ drop policy if exists ps_add  on public.push_subscriptions; create policy ps_add
 drop policy if exists ps_del  on public.push_subscriptions; create policy ps_del  on public.push_subscriptions for delete to authenticated using (public.is_owner());
 revoke all on public.push_subscriptions from anon, authenticated;
 grant select, insert, delete on public.push_subscriptions to authenticated;
+
+-- make the API see the new function and table right away
+notify pgrst, 'reload schema';
