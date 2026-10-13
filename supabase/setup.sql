@@ -1,5 +1,7 @@
 -- MT-THECREATOR shop database. Run once in Supabase > SQL Editor.
--- BEFORE RUNNING: replace OWNER@EMAIL.COM (two places below) with Milly's sign-in email.
+-- BEFORE RUNNING: replace OWNER@EMAIL.COM below with Milly's login: p + her 10-digit phone + @mtthecreator.login
+--   e.g. phone (414) 555-0100  ->  p4145550100@mtthecreator.login
+-- Then in Authentication > Users > Add user, create that same login with her password and tick "Auto Confirm User".
 -- The site reads products, open days and settings with the public key.
 -- Orders are written only by the server (api/checkout.js, service key), and only the owner can read them.
 

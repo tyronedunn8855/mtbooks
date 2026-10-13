@@ -24,10 +24,11 @@
   <!-- sign in -->
   <section id="v-signin" class="pane" hidden>
     <h1>Welcome back, <span class="script">Milly.</span></h1>
-    <p>Enter your email and we'll send you a sign-in link. No password needed.</p>
+    <p>Sign in with your phone number and password.</p>
     <form id="f-signin" class="stack">
-      <label>Email<input type="email" name="email" autocomplete="email" required></label>
-      <button class="pink" type="submit">Send my link</button>
+      <label>Phone number<input type="tel" name="phone" autocomplete="username" inputmode="tel" required></label>
+      <label>Password<input type="password" name="pw" autocomplete="current-password" required></label>
+      <button class="pink" type="submit">Sign in</button>
       <p class="msg" id="signin-msg" role="status"></p>
     </form>
   </section>

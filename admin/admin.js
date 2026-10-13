@@ -19,9 +19,13 @@
   /* ---------- auth ---------- */
   $('#f-signin').addEventListener('submit', async e => {
     e.preventDefault();
-    const email = e.target.email.value.trim(), msg = $('#signin-msg');
-    const { error } = await sb.auth.signInWithOtp({ email, options: { emailRedirectTo: location.origin + '/admin/', shouldCreateUser: false } });
-    msg.textContent = error ? 'Couldn\'t send the link. Check the email and try again.' : 'Check your email for the sign-in link.';
+    const f = e.target, msg = $('#signin-msg'), digits = f.phone.value.replace(/\D/g, '').replace(/^1(?=\d{10}$)/, '');
+    if (digits.length !== 10) { msg.textContent = 'Enter your 10-digit phone number.'; return; }
+    msg.textContent = 'Signing in…';
+    // The phone number becomes a login name (p4145550100@mtthecreator.login); Supabase checks the password.
+    const { error } = await sb.auth.signInWithPassword({ email: 'p' + digits + '@mtthecreator.login', password: f.pw.value });
+    f.pw.value = '';
+    msg.textContent = error ? (error.status === 429 ? 'Too many tries. Wait a few minutes.' : 'That phone number and password don\'t match.') : '';
   });
   $('#out').onclick = async () => { await sb.auth.signOut(); location.reload(); };
 

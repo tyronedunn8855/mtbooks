@@ -3,7 +3,7 @@
 Static site + two Vercel functions. Layout follows ken.didit; the brand, panel and checkout are Milly's own.
 
 - `index.html`, `style.css`, `main.js`: storefront (menu, bag, Stripe checkout, motion with the footer toggle).
-- `admin/`: Milly's Studio (orders, menu & prices, pickup days, shop settings). Sign-in by email link.
+- `admin/`: Milly's Studio (orders, menu & prices, pickup days, shop settings). Sign-in with phone number + password.
 - `api/checkout.js`: prices the bag from the database and opens Stripe Checkout. `api/stripe-webhook.js`: marks orders paid.
 - `supabase/setup.sql`: tables, Row Level Security, starting menu.
 - Tests: `node test/checks.js` (order and price rules, webhook signature). `test/browser.js` needs playwright-core and Chrome.
