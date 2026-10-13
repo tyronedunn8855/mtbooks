@@ -2,6 +2,7 @@
 // then marks the order paid in Milly's panel. api/checkout.js sends the order id as client_reference_id.
 const crypto = require('crypto');
 const sb = require('./_sb');
+const alert = require('./_alert');
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
 
 function verify(raw, header, secret, now) {
@@ -26,10 +27,12 @@ module.exports = async (req, res) => {
   const types = ['checkout.session.completed', 'checkout.session.async_payment_succeeded'];
   if (types.indexOf(ev.type) < 0 || !s || s.payment_status !== 'paid' || !UUID.test(String(s.client_reference_id || ''))) return out(200, 'ignored');
   try {
-    await sb.rest('orders?id=eq.' + s.client_reference_id, {
-      method: 'PATCH', headers: { Prefer: 'return=minimal' },
+    const rows = await sb.rest('orders?id=eq.' + s.client_reference_id + '&paid=eq.false', {
+      method: 'PATCH', headers: { Prefer: 'return=representation' },
       body: JSON.stringify({ paid: true, paid_at: new Date().toISOString(), stripe_session: String(s.id || '').slice(0, 120) })
     });
+    // ping Milly's phone once per order (paid=eq.false above means a Stripe retry won't alert twice)
+    if (rows && rows[0]) await alert.alertAll(alert.orderMessage(rows[0])).catch(e => console.error('alert', e));
   } catch (e) { return out(500, 'retry'); } // Stripe retries on errors
   return out(200, 'ok');
 };

@@ -36,7 +36,7 @@
     const ok = await sb.rpc('is_owner');
     if (ok.error || ok.data !== true) return show('v-denied');
     show('v-app'); $('#tabbar').hidden = false;
-    loadOrders(); loadMenu(); loadDays(); loadShop();
+    loadOrders(); loadMenu(); loadDays(); loadShop(); startAlerts();
   }
   sb.auth.onAuthStateChange((ev) => { if (ev === 'SIGNED_IN') start(); });
 
@@ -167,6 +167,73 @@
     must(await sb.from('settings').upsert({ k: 'shop', v }).select());
     shop = v; toast('Saved');
   }));
+
+  /* ---------- order alerts (Web Push). On iPhone this works once the Studio is on her Home Screen. ---------- */
+  const VAPID = cfg.vapidKey || '';
+  const IPHONE = /iPhone|iPad|iPod/.test(navigator.userAgent);
+  const STANDALONE = (window.matchMedia && matchMedia('(display-mode: standalone)').matches) || navigator.standalone === true;
+  const CAN_PUSH = 'serviceWorker' in navigator && 'PushManager' in window && 'Notification' in window;
+  let swReg = null, pushSub = null;
+  const keyBytes = k => Uint8Array.from(atob(k.replace(/-/g, '+').replace(/_/g, '/') + '==='.slice((k.length + 3) % 4)), c => c.charCodeAt(0));
+  function renderAlerts() {
+    const box = $('#alerts'), txt = $('#alerts-text'), btns = $('#alerts-btns');
+    btns.textContent = '';
+    const btn = (label, act, cls) => { const b = el('button', cls, label); b.type = 'button'; b.dataset.alert = act; btns.append(b); };
+    if (!VAPID) { box.hidden = true; return; }
+    box.hidden = false;
+    if (!CAN_PUSH) {
+      txt.textContent = IPHONE && !STANDALONE
+        ? 'To get a ping for every paid order, add this Studio to your Home Screen first: tap Share, then Add to Home Screen. Open it from that icon and turn alerts on here.'
+        : 'This browser can’t show alerts. Try Chrome, or the Studio app on your Home Screen.';
+      return;
+    }
+    if (Notification.permission === 'denied') { txt.textContent = 'Alerts are blocked. Turn them on in your phone’s Settings, under Notifications.'; return; }
+    if (pushSub && Notification.permission === 'granted') {
+      txt.textContent = 'Alerts are on for this phone. You get a ping for every paid order.';
+      btn('Send a test alert', 'test', 'pink'); btn('Turn off', 'off', 'ghost');
+    } else {
+      txt.textContent = 'Get a ping on this phone every time someone pays for an order.';
+      btn('Turn on order alerts', 'on', 'pink');
+    }
+  }
+  async function startAlerts() {
+    if (!VAPID || !CAN_PUSH) return renderAlerts();
+    try {
+      swReg = await navigator.serviceWorker.register('/admin/sw.js', { scope: '/admin/' });
+      pushSub = await swReg.pushManager.getSubscription();
+    } catch (e) { console.warn(e); }
+    renderAlerts();
+  }
+  $('#alerts-btns').addEventListener('click', async e => {
+    const b = e.target.closest('button[data-alert]'); if (!b) return;
+    b.disabled = true;
+    try {
+      if (b.dataset.alert === 'on') {
+        if (await Notification.requestPermission() !== 'granted') { toast('Alerts stay off: your phone said no.'); return renderAlerts(); }
+        pushSub = await (swReg || await navigator.serviceWorker.ready).pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: keyBytes(VAPID) });
+        const j = pushSub.toJSON();
+        const r = await sb.from('push_subscriptions').insert({ endpoint: j.endpoint, p256dh: j.keys.p256dh, auth: j.keys.auth }).select();
+        if (r.error && r.error.code !== '23505') throw r.error; // 23505: this phone is already on the list
+        toast('Alerts are on. Send a test to check.');
+      } else if (b.dataset.alert === 'test') {
+        const { data: { session } } = await sb.auth.getSession();
+        const r = await fetch('/api/notify', { method: 'POST', headers: { Authorization: 'Bearer ' + (session && session.access_token) } });
+        if (r.status === 503) throw new Error('Alerts aren’t finished on the server yet. Ty needs to add the alert keys.');
+        const j = await r.json().catch(() => ({}));
+        toast(r.ok ? (j.sent ? 'Test sent. Check your phone.' : 'No phone took it. Turn alerts off, then on.') : 'The test didn’t send. Try again.');
+      } else {
+        const ep = pushSub && pushSub.endpoint;
+        if (pushSub) await pushSub.unsubscribe();
+        if (ep) await sb.from('push_subscriptions').delete().eq('endpoint', ep);
+        pushSub = null;
+        toast('Alerts are off for this phone.');
+      }
+    } catch (err) {
+      console.error(err);
+      toast(err && err.message && !err.code ? err.message : 'That didn’t work. Open the Studio from its Home Screen icon and try again.');
+    }
+    renderAlerts();
+  });
 
   start();
 })();

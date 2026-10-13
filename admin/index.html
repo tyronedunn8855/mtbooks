@@ -7,7 +7,12 @@
 <title>Milly's Studio</title>
 <meta name="theme-color" content="#0b0b0b">
 <link rel="icon" href="../img/mt-thecreator-logo.jpg">
-<link rel="apple-touch-icon" href="../img/mt-thecreator-logo.jpg">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<link rel="manifest" href="/admin/manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Milly's Studio">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Pinyon+Script&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
@@ -78,6 +83,11 @@
         <label>Instagram handle<input name="instagram" maxlength="40" placeholder="mtthecreator_"></label>
         <button class="pink" type="submit">Save</button>
       </form>
+      <div class="alerts" id="alerts" hidden>
+        <h2>Order alerts</h2>
+        <p id="alerts-text"></p>
+        <div class="alerts-btns" id="alerts-btns"></div>
+      </div>
     </section>
   </div>
 </main>

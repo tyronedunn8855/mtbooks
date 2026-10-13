@@ -69,3 +69,9 @@ input,select,textarea{font:400 17px var(--sans);padding:12px;border:1px solid rg
 .tabbar i{position:absolute;top:10px;right:calc(50% - 38px);min-width:20px;height:20px;border-radius:10px;background:var(--pink);color:#fff;font:500 12px/20px var(--sans);font-style:normal;letter-spacing:0}
 .toast{position:fixed;left:50%;bottom:90px;transform:translate(-50%,200%);background:var(--ink);color:#fff;border:1px solid var(--pink);padding:12px 20px;transition:transform .3s;z-index:9}
 .toast.on{transform:translate(-50%,0)}
+
+/* order alerts (Shop tab) */
+.alerts{margin-top:26px;background:#fff;border:1px solid var(--line);padding:18px;display:grid;gap:10px}
+.alerts h2{font:600 24px var(--serif)}
+.alerts p{font-size:15px;opacity:.8}
+.alerts-btns{display:flex;gap:8px;flex-wrap:wrap}

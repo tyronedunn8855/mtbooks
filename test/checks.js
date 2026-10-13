@@ -35,4 +35,9 @@ const sig = crypto.createHmac('sha256', sec).update(t + '.' + raw).digest('hex')
 assert(verify(raw, `t=${t},v1=${sig}`, sec));
 assert(!verify(raw + ' ', `t=${t},v1=${sig}`, sec));
 assert(!verify(raw, `t=${t - 600},v1=${sig}`, sec));
+const { orderMessage } = require('../api/_alert');
+const m = orderMessage({ name: 'Ana Lee', total_cents: 2700, fulfil: 'pickup', day: '2026-10-18', items: [{ id: 'loaf', name: 'Mini loaf cake', qty: 2 }, { id: 'flyer', name: 'Flyer', qty: 1 }] });
+assert.equal(m.title, 'New paid order · $27');
+assert.equal(m.body, 'Ana: 2× Mini loaf cake, Flyer · Pickup Sun, Oct 18');
+assert.equal(orderMessage({ name: 'Bo', total_cents: 2050, fulfil: 'delivery', items: [{ id: 'poster', name: 'Poster', qty: 1 }, { id: 'delivery', name: 'Delivery', qty: 1 }] }).body, 'Bo: Poster · Delivery');
 console.log('all checks passed');
