@@ -79,5 +79,5 @@ insert into products (id,cat,name,note,price_cents,sort) values
 on conflict (id) do nothing;
 
 insert into settings (k,v) values
- ('shop', '{"open":true,"banner":"","delivery_fee_cents":0,"phone":"","instagram":"mt.thecreator"}')
+ ('shop', '{"open":true,"banner":"","delivery_fee_cents":0,"phone":"","instagram":"mtthecreator_"}')
 on conflict (k) do nothing;

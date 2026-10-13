@@ -15,7 +15,7 @@
     ['cookie-1', 'treat', 'Cookie', 'Single', 200], ['cookie-3', 'treat', 'Cookies, 3 pack', '', 500],
     ['milly-dozen', 'treat', 'Milly Dozen', '13 cookies', 1500], ['loaf', 'treat', 'Mini loaf cake', '', 500]
   ].map(([id, cat, name, note, price_cents], sort) => ({ id, cat, name, note, price_cents, sort, active: true }));
-  let SHOP = { open: true, banner: '', delivery_fee_cents: 0, phone: '', instagram: 'mt.thecreator' };
+  let SHOP = { open: true, banner: '', delivery_fee_cents: 0, phone: '', instagram: 'mtthecreator_' };
   let DAYS = [];
   const CAT = { paper: 'Design & print', media: 'Photo & video', treat: 'Sweet treat' };
 
