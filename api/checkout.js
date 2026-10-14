@@ -74,7 +74,9 @@ module.exports = async (req, res) => {
       client_reference_id: row.id,
       success_url: site + '/?paid=1#order',
       cancel_url: site + '/?cancelled=1#order',
-      'phone_number_collection[enabled]': 'false'
+      'phone_number_collection[enabled]': 'false',
+      // Cards (plus Apple Pay / Google Pay) always; don't depend on dashboard payment-method settings.
+      'payment_method_types[0]': 'card'
     });
     if (r.order.email) f.set('customer_email', r.order.email);
     r.lines.forEach((l, i) => {
