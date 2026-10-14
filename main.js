@@ -214,7 +214,7 @@
     if (window.__rm || !window.gsap || !window.ScrollTrigger) { $$('[data-rv]').forEach(e => e.removeAttribute('data-rv')); return; }
     gsap.registerPlugin(ScrollTrigger);
     if (window.Lenis) {
-      lenis = new Lenis({ lerp: .1 });
+      lenis = new Lenis({ lerp: .1, prevent: n => !!(n && n.closest && n.closest('#drawer, [data-lenis-prevent]')) });
       lenis.on('scroll', ScrollTrigger.update);
       gsap.ticker.add(t => lenis.raf(t * 1000)); gsap.ticker.lagSmoothing(0);
       $$('a[href^="#"]').forEach(a => a.addEventListener('click', e => { const t = a.getAttribute('href'); if (t.length > 1 && $(t)) { e.preventDefault(); lenis.scrollTo(t, { offset: -70 }); } }));

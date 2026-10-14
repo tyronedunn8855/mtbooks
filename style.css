@@ -130,13 +130,13 @@ html.rm .statement .w{opacity:1}
 /* bag drawer */
 .scrim{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:40;opacity:0;pointer-events:none;transition:opacity .3s}
 .scrim.on{opacity:1;pointer-events:auto}
-.drawer{position:fixed;top:0;right:0;bottom:0;width:min(460px,100%);background:var(--paper);color:var(--ink);z-index:50;transform:translateX(100%);transition:transform .45s cubic-bezier(.2,.8,.2,1);display:flex;flex-direction:column}
+.drawer{position:fixed;top:0;right:0;bottom:0;height:100%;height:100dvh;width:min(460px,100%);background:var(--paper);color:var(--ink);z-index:50;transform:translateX(100%);transition:transform .45s cubic-bezier(.2,.8,.2,1);display:flex;flex-direction:column}
 .drawer.on{transform:none}
 html.rm .drawer,html.rm .scrim{transition:none}
 .dr-head{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;border-bottom:1px solid var(--line-d)}
 .dr-head h2{font-size:32px}
 .x{background:none;border:0;font-size:30px;line-height:1;padding:4px 8px}
-.dr-body{flex:1;overflow:auto;padding:8px 24px 24px}
+.dr-body{flex:1 1 auto;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;touch-action:pan-y;padding:8px 24px calc(32px + env(safe-area-inset-bottom,0px))}
 .line{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line-d)}
 .line .nm{font-size:16px}.line .nm small{display:block;opacity:.6}
 .qty{display:flex;align-items:center;border:1px solid var(--line-d)}
