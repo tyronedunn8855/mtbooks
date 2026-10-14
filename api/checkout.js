@@ -74,9 +74,8 @@ module.exports = async (req, res) => {
       client_reference_id: row.id,
       success_url: site + '/?paid=1#order',
       cancel_url: site + '/?cancelled=1#order',
-      'phone_number_collection[enabled]': 'false',
-      // Cards (plus Apple Pay / Google Pay) always; don't depend on dashboard payment-method settings.
-      'payment_method_types[0]': 'card'
+      'phone_number_collection[enabled]': 'false'
+      // Payment methods come from her Stripe Dashboard (Settings > Payment methods). Stripe no longer accepts payment_method_types here.
     });
     if (r.order.email) f.set('customer_email', r.order.email);
     r.lines.forEach((l, i) => {
